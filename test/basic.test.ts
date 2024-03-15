@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { assert, beforeAll, describe, expect, expectTypeOf, test } from 'vitest'
+import { assert, describe, expect, expectTypeOf, test } from 'vitest'
 
 // New user data type
 interface Data {
@@ -19,14 +19,12 @@ let body: Data; // Register user data
 describe("user registerd Api test", async () => {
       let response: any; // Api response
 
-      /** Call before all test */
+      /** New User registration api calling */
       response = await axios.post('https://dummyjson.com/auth/login', {
             username: 'atuny0',
             password: '9uQFF1Lh',
       });
       body = response.data
-      console.log(body)
-
 
       /** Check Api response*/
       test('should have response status 200', () => {
@@ -55,6 +53,8 @@ describe("user registerd Api test", async () => {
 describe("current user login Api test", async () => {
       let response: any;
       let userData: any;
+
+      /** Login current user api calling */
       response = await axios.get('https://dummyjson.com/auth/me', {
             headers: {
                   Authorization: body.token,
@@ -62,7 +62,6 @@ describe("current user login Api test", async () => {
       });
 
       userData = response.data;
-      console.log(userData)
 
       /** Check login user name is valid or not */
       test('User login', () => {
